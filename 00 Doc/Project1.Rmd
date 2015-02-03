@@ -16,6 +16,16 @@ end.rcode-->
 
 ```{r}
 source("../01 Data/DataFrameCode.R", echo = FALSE)
+dforder_details
+dfcustomer
+dfitems
+dforders
+ggplot(dfcustomer, aes(x = CUSTOMER_ID, y = CUSTOMER_CITY)) + geom_point()
+ggplot(dforder_details, aes(x = ORDER_ID, y = ORDER_QTY)) + geom_point()
+ggplot(dfitems, aes(x = TITLE, y = ARTIST)) + geom_point()
+ggplot(dforders, aes(x = ORDER_DATE, y = SHIPPED_DATE)) + geom_point()
+
+
 ```
 
 
