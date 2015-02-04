@@ -1,169 +1,60 @@
 ---
 output: html_document
 ---
-R Technology Workshop
+CS 329E Data Visualization - Project 1
 ===
-**R is the most popular free software environment for statistical computing and graphics. ggplot2 is a data visualization package for R that can be used to produce publication-quality graphics. This workshop is designed to introduce you to R and ggplot as well as RStudio, KnitR, Slidify, and Shiny.  
-R is a central piece of the Big Data Analytics Revolution, for example, see http://opensource.com/business/14/7/interview-david-smith-revolution-analytics for an article entitled "Big data influencer on how R is paving the way"**
+**For this project, we explore the different capabilities of the R programming language in terms of plotting data from different data frames. We extract data from the OracleCloud and produce publication-quality plots to demonstrate various different graphing techniques.**
+
+**Authors: Bruno De Hoyos, Steven Garza**
 
 ###Importing data frames:
 
+We begin by importing some useful libraries:
+
 ```{r}
-
-options(width=120)
-source("../01 Data/DataFrameCode.R", echo = TRUE, max.deparse.length=1e3)
-
-source("../02 Visualizations/Plot1.R", echo = TRUE, max.deparse.length=1e3)
-
-source("../01 Data/DataFrameCode2.R", echo = TRUE, max.deparse.length=1e3)
-
-source("../02 Visualizations/Plot2.R", echo = TRUE, max.deparse.length=1e3)
-
-
+source("../01 Data/LibrarySetup.R", echo=TRUE, max.deparse.length=1e3)
 ```
 
-You also need to install LaTeX if you want to generate PDF files from KnitR.  
+We now begin building our data frames. We build the data frames through the data.frame() function, and passing to it a URL to an OracleCloud server with an appropriate SQL query.
 
+```{r}
+source("../01 Data/DataFrameCode.R", echo = TRUE, max.deparse.length=1e3)
+```
 
-###Getting Started - Clone the RWorkshop GiT Repository:
+We print out the data frames using the head() function to ensure that they all contain data and no errors were encountered while fetching the data.
 
-Use a GUI tool like SourceTree to clone the repository or execute the following commands in a terminal window:
+```{r}
+source("../01 Data/DataFrameShow.R", echo = TRUE, max.deparse.length=1e3)
+```
 
-**Phils-MacBook-Pro:Mine pcannata$ pwd**  
-/Users/pcannata  
-**Phils-MacBook-Pro:~ pcannata$ git clone https://github.com/pcannata/DataVisualization.git**  
-Cloning into 'DataVisualization'...
-remote: Counting objects: 74, done.
-remote: Compressing objects: 100% (60/60), done.
-remote: Total 74 (delta 6), reused 67 (delta 4)
-Unpacking objects: 100% (74/74), done.
-Checking connectivity... done.  
-**Phils-MacBook-Pro:~ pcannata$ ls -a DataVisualization/**  
-.  	..		.git		README.md	RWorkshop
+###Visualizing the data:
 
-###Getting Started - Create a New RStudio Project for the code in the cloned repository:
+With our data in place, we are now ready to produce some meaningful plots. The following commands make a single plot out of the four data frames we just built.
 
-  
+```{r}
+source("../02 Visualizations/Plot1.R", echo = TRUE, max.deparse.length=1e3)
+```
 
-###Getting Started - Create a .Rprofile file to load libraries when the project is started: 
+By studying these plots, we can get some meaningful and interesting information from them.
 
-Create an new file named .Rprofile by copying the .Rhistory file, see below 
+For the first plot, we decided to make a histogram of the number of people representing each state within our data frame. Although not very exciting, we are able to see that the majority of the data comes from customers in California, indicating a possible bias in the poll.
 
+The second plot is a point plot showing the unit price of an album for various artists. Althought we can immediately see that the music albums range in price from $13 to $17, we are able to see a clear division of prices between 'expensive' artists and 'inexpensive' artists. This division may be an indication to the quality of the music.
 
-Load each of the libraries shown in the image below into RStudio and copy the library call into the .Rprofile file as below, 
+For the third plot, we made a histogram showing the number of orders a specific customer made throughout the data collection period. We can see that there is a large majority of customers who only make a single order, and a couple of outliers who made 4 or more orders.
 
+Finally, for the fourth plot, we made another histogram showing the number of items in each of the orders in our data. Again, we see that most orders are composed of a single item, with a few outlier orders which had significantly more items than the average.
 
+###Combining the data:
 
-###Recommended Books:
+Now that we have a sense of what our data looks like, we are ready to combine all of the data frames into a single, large data frame. We do this through the following command, and calling head() afterwards to ensure that the data was stored in the data frame:
 
+```{r}
+source("../01 Data/DataFrameCode2.R", echo = TRUE, max.deparse.length=1e3)
+```
 
-http://www.amazon.com/Everyone-Advanced-Analytics-Graphics-Addison-Wesley/dp/0321888030/ref=sr_1_1?ie=UTF8&qid=1404611818&sr=8-1&keywords=R+for+everyone
+With the large data frame loaded into R, we are now able to make some complex and interesting plots using a variety of the data columns as inputs to our plots. The following commands illustrates how to achieve these plots:
 
-http://www.amazon.com/Reproducible-Research-RStudio-Chapman-Series/dp/1466572841/ref=sr_1_1?ie=UTF8&qid=1404612129&sr=8-1&keywords=reproducible+research+with+r
-
-###High Level Overview - Creating an Excel-like Chart in R 
-
-This is something that is easily done in Excel: 
-
-
-How would you do the same thing in R? 
-
-
-I removed something here
-
-
-
-###Basic R Language Constructs
-
-See also http://cran.r-project.org/doc/manuals/r-devel/R-lang.html, http://www.r-tutor.com/r-introduction, and http://www.cookbook-r.com/
-
-I removed something here
-
-###R Dataframes
-
-**A data frame is used for storing data tables. It is a list of vectors of equal length. For example, the following variable df is a data frame containing three vectors n, s, b.**
-
-I removed something here
-
-Dataframes can be loaded from databases, CSVs, Excel, etc.. Loading dataframes from an Oracle database will be discussed later in this Workshop.
-
-See also http://www.r-tutor.com/r-introduction/data-frame
-
-Many R packages come with demo dataframes. The ggplot package comes with a demo dataframe called diamonds which we will use for this workshop.
-
-I removed something here
-
-For more on subsetting dataframes see http://www.ats.ucla.edu/stat/r/faq/subset_R.htm
-
-###Connecting to Oracle with RestfulReL
-**TBD**
-
-###ggplot2
-**ggplot is an R package for data exploration and visualization. It produces production quality graphics and allows you to slice and dice your data in many different ways. ggplot uses a general scheme for data visualization which breaks graphs up into semantic components such as scales and layers. In contrast to other graphics packages, ggplot2 allows the user to add, remove or alter components in a plot at a high level of abstraction.**
-
-See also http://ggplot2.org/, http://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf, and https://groups.google.com/forum/#!forum/ggplot2
-
-I removed something here
-
-**The Chapter 7 of "R for Everyone" has many more examples of ggplots.**
-
-###ggplot2 and functions
-
-I removed something here
-
-**You should now be able to open RWorkshop/00 Doc/4diamonds.png. It should look like the following plot.**
-
-
-###KnitR
-**KnitR is an R package designed to generate dynamic reports using a mix of the R, LaTex, and the Rmarkdown (see http://rmarkdown.rstudio.com/?version=0.98.945&mode=desktop) languages.**  
-
-See also http://yihui.name/knitr/ and http://kbroman.github.io/knitr_knutshell/
-
-**Simple examples can be found in "04 KnitR/doc1.Rmd" and "04 KnitR/doc2.Rmd". These can generate html, pdf, and word documents. The output from Kniting doc2.Rmd is,**  
-
-
-####A comprehensive KnitR example (which generated this document) can be found in "00 Doc/RWorkshop.Rmd".  
-
-###slidify
-**You can use Slidify to generate HTML slide decks using only the Rmarkdown language.**  
-
-See also http://slidify.org and http://slidify.org/start.html
-
-**Follow the instructions in "05 Slidify/slidify setup.R" to install and run slidify. You should be able to produce a slide deck with a first slide that looks something like the following.** 
-
-
-**Cool trick - Any github repo with a branch called gh-pages will get served as a website. If the content of that repo is the stuff of websites (html,css), then you get free web hosting. So, create a branch called gh-pages and push to it.**  
-
-###shiny
-**The shiny R package allows you to build interactive web-based applications using only R with no knowledge of html, css, or javascript needed. You just need to write two scripts (see the example files in the 06Shiny directory):**  
-
-* ui.R : Defines the layout and the interactive elements that the user can access.  
-* server.R : Defines what computations are done in response to user interactions. 
-
-See also http://shiny.rstudio.com and http://shiny.rstudio.com/tutorial 
-
-To run the shiny app that's in the 06Shiny directory run the following in the main RWorkshop directory (make sure the working directory is set to this directory):  
-library(shiny)  
-runApp("06Shiny")   # Make sure there are no spaces in the string argument to runAPP
-
-This should pop the application up in a browser, you can also access it in a browser at http://127.0.0.1:6837. It should look like the following.
-
-
-###shinyapps
-
-The example above ran the shiny app on your local machine, but to share with others, you have to send around the R files and the user needs to have R and know a little bit about it.
-
-Instead, you can remotely host shiny apps and then just send people links. Get a free account at shinyapps.io/signup.html and give it a try.
-
-
-**library("devtools", lib.loc="/Library/Frameworks/R.framework/Versions/3.0/Resources/library")  
-install_github( repo = "shinyapps", username="rstudio" )  
-shinyapps::setAccountInfo(name='pcannata', token='3ECF447A741004F6A8B7208C9ED778E1', secret='. . . ')**  
-
-I removed something here
-
-**Now you can try the app at https://pcannata.shinyapps.io/06Shiny/ **  
-
-See also https://www.shinyapps.io/ and http://shiny.rstudio.com/articles/shinyapps.html 
-
-
+```{r}
+source("../02 Visualizations/Plot2.R", echo = TRUE, max.deparse.length=1e3)
+```
