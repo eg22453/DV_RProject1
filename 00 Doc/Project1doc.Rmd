@@ -5,7 +5,7 @@ CS 329E Data Visualization - Project 1
 ===
 **For this project, we explore the different capabilities of the R programming language in terms of plotting data from different data frames. We extract data from the OracleCloud and produce publication-quality plots to demonstrate various different graphing techniques.**
 
-**Authors: Bruno De Hoyos, Steven Garza**
+**Authors: Bruno De Hoyos, Estevan Garza (eg22453)**
 
 ###Importing data frames:
 
